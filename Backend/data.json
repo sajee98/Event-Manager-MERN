@@ -1,0 +1,38 @@
+[
+  {
+    "title": "Train or Bus journey? Why on suits?",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga nisi autem voluptate voluptatum repellat accusamus soluta reprehenderit temporibus dolore cumque eos ut laborum, architecto ab ex ad quae magnam ea alias aliquid modi facere nostrum. Inventore numquam assumenda eaque beatae a saepe repudiandae id eum. Velit doloribus pariatur est quos!.",
+    "status": "travel",
+    "date": "2024-07-14T",
+    "image": "https://via.placeholder.com/800x400.png?text=Introduction+to+Node.js",
+    "createdAt": "2024-07-15T10:00:00Z",
+    "updatedAt": "2024-07-15T10:00:00Z"
+  },
+  {
+    "title": "The Future of AI in Everyday Life",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga nisi autem voluptate voluptatum repellat accusamus soluta reprehenderit temporibus dolore cumque eos ut laborum, architecto ab ex ad quae magnam ea alias aliquid modi facere nostrum. Inventore numquam assumenda eaque beatae a saepe repudiandae id eum. Velit doloribus pariatur est quos!.",
+    "status": "technology",
+    "date": "2024-07-14T",
+    "image": "https://via.placeholder.com/800x400.png?text=The+Future+of+AI",
+    "createdAt": "2024-07-16T10:00:00Z",
+    "updatedAt": "2024-07-16T10:00:00Z"
+  },
+  {
+    "title": "Healthy Eating Habits for a Better Life",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga nisi autem voluptate voluptatum repellat accusamus soluta reprehenderit temporibus dolore cumque eos ut laborum, architecto ab ex ad quae magnam ea alias aliquid modi facere nostrum. Inventore numquam assumenda eaque beatae a saepe repudiandae id eum. Velit doloribus pariatur est quos!.",
+    "status": "health",
+    "date": "2024-07-14T",
+    "image": "https://via.placeholder.com/800x400.png?text=Healthy+Eating+Habits",
+    "createdAt": "2024-07-17T10:00:00Z",
+    "updatedAt": "2024-07-17T10:00:00Z"
+  },
+  {
+    "title": "Exploring the Wonders of Space",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga nisi autem voluptate voluptatum repellat accusamus soluta reprehenderit temporibus dolore cumque eos ut laborum, architecto ab ex ad quae magnam ea alias aliquid modi facere nostrum. Inventore numquam assumenda eaque beatae a saepe repudiandae id eum. Velit doloribus pariatur est quos!.",
+    "status": "science",
+    "date": "2024-07-14T",
+    "image": "https://via.placeholder.com/800x400.png?text=Exploring+Space",
+    "createdAt": "2024-07-18T10:00:00Z",
+    "updatedAt": "2024-07-18T10:00:00Z"
+  }
+]
