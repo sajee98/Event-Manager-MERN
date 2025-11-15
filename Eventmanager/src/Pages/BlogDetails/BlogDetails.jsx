@@ -4,151 +4,159 @@ import axios from "axios";
 
 const BlogDetails = () => {
   const { id } = useParams();
-  const [blogs, setBlogs] = useState([]);
+  const [blog, setBlog] = useState(null);
   const [vendors, setVendors] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [vendorLoading, setVendorLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [showFilter, setShowFilter] = useState(false);
 
-  // Fetch all blogs once on mount
   useEffect(() => {
-    const fetchBlogs = async () => {
+    const fetchBlog = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/posts");
-        setBlogs(response.data);
-        setLoading(false);
-      } catch (err) {
-        setError("Failed to load blogs.");
+        const response = await axios.get(`http://localhost:3000/api/posts/${id}`);
+        setBlog(response.data);
+      } catch {
+        setError("Failed to load blog.");
+      } finally {
         setLoading(false);
       }
     };
-    fetchBlogs();
-  }, []);
+    fetchBlog();
+  }, [id]);
 
-  // Find blog by id
-  const blog = blogs.find((b) => String(b.id || b._id) === id);
-
-  // Fetch vendors for this blog's category/status
   useEffect(() => {
-    if (blog?.status) {
-      const fetchVendors = async () => {
-        try {
-          const res = await axios.get(
-            `http://localhost:3000/api/vendors/category/${blog.status}`
-          );
-          setVendors(res.data); // all vendors for this category
-        } catch (err) {
-          setVendors([]);
-        }
-      };
-      fetchVendors();
-    }
+    if (!blog?.status) return;
+    const fetchVendors = async () => {
+      setVendorLoading(true);
+      try {
+        const res = await axios.get(
+          `http://localhost:3000/api/vendors/category/${blog.status}`
+        );
+        setVendors(res.data);
+      } catch {
+        setVendors([]);
+      } finally {
+        setVendorLoading(false);
+      }
+    };
+    fetchVendors();
   }, [blog]);
 
-  if (loading) return <p className="text-center mt-10">Loading...</p>;
+  if (loading) return <p className="text-center mt-10">Loading blog...</p>;
   if (error) return <p className="text-center mt-10 text-red-500">{error}</p>;
   if (!blog) return <p className="text-center mt-10">Blog not found.</p>;
 
+  const brands = ["2nd Day","A Question Or","AIDO","Alice & You","American Apparet","American Vintage","AQ AQ"];
+
   return (
-    <div className="w-full flex items-center justify-center bg-white pb-[80px]">
-      <div className="lg:container mx-auto">
-        {/* Blog Title */}
-        <div className="flex items-center justify-between gap-10">
-          <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight mb-4 mt-3 relative">
-    {blog.status}
-            <span className="block w-16 h-1 bg-gradient-to-r from-pink-500 to-orange-400 rounded-full mt-2"></span>
-          </h1>
-        </div>
+    <div className="w-full bg-white pb-20 px-4 md:px-0">
+      {/* Toggle button for mobile */}
+      <div className="flex justify-end md:hidden mt-4">
+        <button
+          onClick={() => setShowFilter(!showFilter)}
+          className="px-4 py-2 bg-purple-600 text-white rounded-md font-semibold"
+        >
+          {showFilter ? "Hide Filters" : "Show Filters"}
+        </button>
+      </div>
 
-        <div className="md:flex items-center justify-between gap-12 mt-8 md:space-y-0 space-y-8">
-          {/* Blog main content */}
-          <div className="max-w-[712px] min-h-[456px] h-full w-full">
-            <img
-              src={blog.image}
-              alt={blog.title}
-              className="max-w-[712px] min-h-[456px] h-full w-full object-cover rounded-2xl"
-            />
-          </div>
+      <div className="lg:container mx-auto flex flex-col md:flex-row gap-6 mt-6">
+        {/* Filter Sidebar */}
+        {(showFilter || window.innerWidth >= 768) && (
+          <div className="w-full md:w-60 p-4 md:p-6 bg-white shadow-md rounded-xl flex-shrink-0 h-fit sticky top-6 space-y-6">
+            {/* Search */}
+            <div>
+              <h2 className="text-sm font-bold mb-2">Search</h2>
+              <input
+                type="text"
+                placeholder="Search vendors..."
+                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
 
-          <div>
-            <div className="min-w-[478px] w-full bg-white rounded-2xl p-5 shadow">
-              <div className="flex items-center justify-between gap-2 mb-6">
-                <h5 className="text-base text-primary-dark-gray font-bold uppercase">
-                  {blog.status}
-                </h5>
-                <span className="text-sm text-secondary-dark-gray font-semibold capitalize">
-                  {blog.date}
-                </span>
+            {/* Price */}
+            <div>
+              <h2 className="text-sm font-bold mb-2">Price Range</h2>
+              <div className="flex gap-2">
+                <input
+                  type="number"
+                  placeholder="$0"
+                  className="w-1/2 px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none"
+                />
+                <input
+                  type="number"
+                  placeholder="$1000"
+                  className="w-1/2 px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none"
+                />
               </div>
-              <h3 className="text-3xl text-gray-800 font-bold mb-5">
-                {blog.title}
-              </h3>
-              <p className="text-base text-gray-600 mb-6">
-                {blog.description}
-              </p>
+            </div>
 
-              <Link
-                to="/blog"
-                className="text-base text-gray-800 font-bold capitalize px-10 py-4 bg-white rounded-2xl border border-violet-500 inline-block"
-              >
-                Back to Home
-              </Link>
+            {/* Brands */}
+            <div>
+              <h2 className="text-sm font-bold mb-2">Brand</h2>
+              <div className="flex flex-wrap md:flex-col gap-2">
+                {brands.map((brand) => (
+                  <label key={brand} className="flex items-center gap-2 text-sm cursor-pointer">
+                    <input type="checkbox" className="form-checkbox h-4 w-4 text-purple-600" />
+                    <span className="text-gray-700">{brand}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* Reset */}
+            <div className="flex gap-3 mt-4 flex-wrap">
+              <button className="flex-1 px-4 py-2 border text-sm border-gray-300 rounded-md font-semibold hover:bg-gray-100 transition">
+                Reset
+              </button>
             </div>
           </div>
+        )}
+
+        {/* Vendor Section */}
+        <div className="flex-1">
+          {/* Blog Title */}
+          <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight mb-4 mt-4 relative">
+            {blog.status}
+            <span className="block w-18 h-1 bg-gradient-to-r from-pink-500 to-orange-400 rounded-full mt-2"></span>
+          </h1>
+
+          {vendorLoading ? (
+            <p className="text-center mt-6">Loading vendors...</p>
+          ) : vendors.length > 0 ? (
+            <div className="mt-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-10">
+                {vendors.map((vendor) => (
+                  <div key={vendor._id} className="space-y-4 bg-white p-4 rounded-2xl shadow-md">
+                    <div className="w-full h-64 sm:h-72 md:h-60 overflow-hidden rounded-2xl">
+                      <img
+                        src={vendor.image || "/placeholder.jpg"}
+                        alt={vendor.vendorName}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <h3 className="text-xl md:text-2xl font-bold text-gray-800 capitalize">
+                      {vendor.vendorName}
+                      <h5 className="text-sm md:text-base text-gray-400">{vendor.category || "Vendor"}</h5>
+                    </h3>
+                    <p className="text-sm md:text-base text-gray-600">
+                      {vendor.aboutUs ? vendor.aboutUs.slice(0, 100) + "..." : "No address available."}
+                    </p>
+                    <Link
+                      to={`/vendorDetails/${vendor._id}`}
+                      className="text-sm md:text-lg text-violet-800 font-bold capitalize hover:underline"
+                    >
+                      View Vendor
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <p className="text-center mt-10">No vendors found.</p>
+          )}
         </div>
-
-       {vendors.length > 0 && (
-  <div className="mt-10">
-    <h2 className="text-3xl font-bold mb-6">Vendors</h2>
-    <div className="grid md:grid-cols-3 gap-8">
-      {vendors.map((vendor) => (
-        <div
-          key={vendor._id}
-          className="space-y-5 bg-white p-4 rounded-2xl shadow-md"
-        >
-          {/* Vendor Image */}
-          <div className="w-full max-h-[360px] h-full overflow-hidden rounded-2xl">
-            <img
-              src={vendor.image || "/placeholder.jpg"}
-              alt={vendor.vendorName}
-              className="w-full min-h-[360px] object-cover"
-            />
-          </div>
-
-          {/* Status & Date (you can replace with something meaningful for vendors) */}
-          <div className="flex items-center justify-between gap-2 mb-6">
-            <h5 className="text-base text-primary-dark-gray font-bold uppercase">
-              {vendor.category || "Vendor"}
-            </h5>
-            <span className="text-sm text-secondary-dark-gray font-semibold capitalize">
-              {vendor.phoneNo || "No Phone"}
-            </span>
-          </div>
-
-          {/* Title */}
-          <h3 className="text-2xl text-gray-800 font-bold capitalize">
-            {vendor.vendorName}
-          </h3>
-
-          {/* Short Description */}
-          <p className="text-base text-gray-600">
-            {vendor.aboutUs
-              ? vendor.aboutUs.slice(0, 100) + "..."
-              : "No address available."}
-          </p>
-
-          {/* View More */}
-          <Link
-            to={`/vendorDetails/${vendor._id}`}
-            className="text-lg text-violet-800 font-bold capitalize hover:underline"
-          >
-            View Vendor
-          </Link>
-        </div>
-      ))}
-    </div>
-  </div>
-)}
-
       </div>
     </div>
   );

@@ -32,74 +32,33 @@ const RecentPost = () => {
   }
 
   return (
-    <div className="w-full flex items-center justify-center bg-white pb-[80px]">
+    <div className="w-full flex items-center justify-center  bg-white pb-10 bg-[url('https://img.freepik.com/free-vector/background-leaf-pattern-design-template_483537-2317.jpg?semt=ais_incoming&w=740&q=80')]
+  bg-no-repeat bg-cover bg-center">
       <div className="lg:container mx-auto">
-        <div className="flex items-center justify-between gap-10">
-          <SectionHeader
-            title={"Our Recent Posts"}
-            style={"flex items-center justify-start"}
-          />
-          {!view && (
-            <Link to="/planner">
-              <button
-                className="text-base text-white bg-purple-800 py-4 px-11 rounded-xl cursor-pointer font-bold capitalize"
-                style={{ fontFamily: "Roboto, sans-serif" }}
-              >
-                View All
-              </button>
-            </Link>
-          )}
-        </div>
+       <div className="flex flex-col md:flex-row items-start  md:items-center md:pl-3 justify-between gap-4 md:gap-10 w-full">
+  <SectionHeader
+    title={"Categories"}
+    style={"w-full md:w-auto flex items-start md:items-center"} // let header take full width on small
+  />
 
-        <div className="md:flex items-center justify-between gap-12 mt-8 md:space-y-0 space-y-8">
-          <div className="max-w-[712px] min-h-[456px]  h-auto w-full">
-            <img
-              src="https://static.malabargoldanddiamonds.com/media/boiimages/bg/thumbs/1628165340tamil_b.jpg"
-              alt=""
-              className="max-w-[712px] min-h-[456px]  h-full w-full object-cover rounded-2xl"
-            />
-          </div>
-          <div>
-            <div className="min-w-[478px] w-full bg-white rounded-2xl p-5 shadow">
-              <div className="flex items-center justify-between gap-2 mb-6">
-                <h5 className="text-base text-primary-dark-gray font-bold font-roboto uppercase">
-                  Customer Reviews
-                </h5>
-                <span
-                  style={{ fontFamily: "Roboto, sans-serif" }}
-                  className="text-sm text-secondary-dark-gray font-roboto font-semibold capitalize"
-                >
-                  28 June 2025
-                </span>
-              </div>
-              <h3 className="text-3xl text-gray-800 font-raleway font-bold mb-5">
-                sLorem ipsum dolor sit amet consectetur adipisicing reiciendis.
-                Adipisci ullam asperiores
-              </h3>
-              <p
-                style={{ fontFamily: "Roboto, sans-serif" }}
-                className="text-base text-gray-600 font-roboto font-normal mb-6"
-              >
-                Lorem ipsum dolor sit amet consequatur possimus enim, animi, ad
-                autem at tempore, totam obcaecati exercitationem quam quia
-                incidunt iste? Tempora, molestias corporis Lorem ipsum dolor sit
-                amet, consectetur adipisicing elit. Repudiandae reiciendis qui
-                blanditiis consequatur possimus enim, animi, ad autem at
-                tempore, totam obcaecati exercitationem quam quia incidunt iste?
-                Tempora, molestias corporis.
-              </p>
-              {/* <Link
-                to="/planner"
-                className="text-base text-gray-800 font-raleway font-bold capitalize px-10 py-4 bg-white rounded-2xl border border-violet-500 inline-block"
-              >
-                Read More
-              </Link> */}
-            </div>
-          </div>
-        </div>
+  {!view && (
+    <Link to="/planner" className="w-full md:w-auto">
+      <button
+        className="block w-full md:inline-block text-sm md:text-base text-white bg-purple-800 py-2 px-6 md:py-4 md:px-11 rounded-xl cursor-pointer font-bold capitalize text-center"
+        style={{ fontFamily: "Roboto, sans-serif" }}
+        aria-label="View all posts"
+      >
+        View All
+      </button>
+    </Link>
+  )}
+</div>
+
+
+      
 
         {/* blog wrapper */}
-        <div className="grid md:grid-cols-3 gap-8 mt-10">
+        <div className="grid md:grid-cols-4 gap-4 mt-10">
           {filteringPosts?.map((post) => (
             <Card key={post._id || post.id} post={post} />
           ))}
