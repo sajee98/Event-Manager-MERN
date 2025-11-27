@@ -38,8 +38,8 @@ const Navbar = () => {
                 to={page.path}
                 className={({ isActive }) =>
                   isActive
-                    ? "text-sm text-purple-600 font-semibold capitalize"
-                    : "text-sm text-gray-800 font-medium capitalize hover:text-purple-600 transition"
+                    ? "text-sm text-amber-400 font-semibold capitalize"
+                    : "text-sm text-gray-800 font-medium capitalize hover:text-amber-400 transition"
                 }
               >
                 {page.name}
@@ -53,20 +53,20 @@ const Navbar = () => {
               className="bg-transparent border-none cursor-pointer p-1"
               aria-label="Search"
             >
-              <CiSearch size="1.5rem" className="text-purple-500" />
+              <CiSearch size="1.5rem" className="text-amber-500" />
             </button>
 
             <button
               className="bg-transparent border-none cursor-pointer p-1 relative"
               aria-label="Notifications"
             >
-              <FaRegBell size="1.4rem" className="text-purple-500" />
+              <FaRegBell size="1.4rem" className="text-amber-500" />
               <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
             </button>
 
             <Link
               to="/login"
-              className="flex items-center gap-1 bg-purple-600 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-purple-700 transition"
+              className="flex items-center gap-1 bg-amber-400 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-purple-700 transition"
             >
               <FiUser size="1rem" />
               Login

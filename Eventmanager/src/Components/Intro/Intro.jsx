@@ -44,10 +44,10 @@ const Intro = () => {
                 Get a Quote
               </Link>
               <Link
-                to="/portfolio"
-                className="inline-block px-6 py-3 border border-[#79A085] text-[#79A085] rounded-lg font-semibold hover:bg-[#79A085] hover:text-white transition"
+                to="/planner"
+                className="inline-block px-6 py-3 border bg-amber-300 border-amber-200 text-[#043915] rounded-lg font-semibold hover:bg-white hover:text-gray-800 transition"
               >
-                View Portfolio
+                View Services
               </Link>
             </div>
 

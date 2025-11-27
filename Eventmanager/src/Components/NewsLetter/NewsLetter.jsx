@@ -3,7 +3,7 @@
 const NewsLetter = () => {
 
     return (
-          <div className='w-full min-h-[534px] h-full banner_section flex items-center justify-center  mb-[20px] md:py-0 py-14 px-4'  style={{ backgroundColor: "#79A085" }}>
+          <div className='w-full min-h-[534px] h-full banner_section flex items-center justify-center  mb-[0px] md:py-0 py-14 px-4'  style={{ backgroundColor: "#79A085" }}>
             <div className="lg:container mx-auto flex items-center justify-center">
 
                 <div className="flex flex-col items-center justify-center max-w-[768px] w-full text-center md:gap-7 gap-5">

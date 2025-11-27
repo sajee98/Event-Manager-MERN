@@ -4,7 +4,7 @@ import Navbar from './Components/Navbar/Navbar'
 import Footer from './Components/Footer/Footer'
 import { BrowserRouter, Route, Router, Routes } from 'react-router-dom'
 import Home from './Pages/Home/Home'
-import BlogDetails from './Pages/BlogDetails/BlogDetails'
+import ViewVendors from './Pages/ViewVendors/ViewVendors'
 import VendorRegister from './Pages/vendor/VendorRegister'
 import VendorDetails from './Pages/VendorDetails/vendorDetails'
 import Planners from './Pages/Planners/Planners'
@@ -19,7 +19,7 @@ function App() {
        <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/planner' element={<Planners />} />
-        <Route path='/details/:id' element={<BlogDetails />} />
+        <Route path='/details/:id' element={<ViewVendors />} />
         <Route path='/vendor' element={<VendorRegister />} />
         <Route path='/vendorDetails/:id' element={<VendorDetails />} />
 

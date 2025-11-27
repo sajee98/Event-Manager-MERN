@@ -21,8 +21,9 @@ mongoose.connect('mongodb://localhost:27017/event')
   .catch(err => console.error('MongoDB connection error:', err));
 
 // Routes
-app.use('/api/posts', PostRoutes);
-app.use('/api/vendors', VendorRoutes);
+app.use('/api/post', PostRoutes);
+app.use('/api/vendor', VendorRoutes);
+
 
 // ✅ Serve uploaded images
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
